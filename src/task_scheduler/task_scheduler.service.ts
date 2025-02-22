@@ -439,14 +439,7 @@ export class TaskScheduler {
     console.log('specificCardBets ->', specificCardBets);
     console.log('totalBetAmount ->', totalBetAmount);
 
-    // Step 3: Try to select a card based on the defined ratios in a **single loop**
-    const sortedCards = Object.entries(specificCardBets).sort(
-      (a, b) => b[1] - a[1],
-    );
 
-    console.log('sortedCard', sortedCards);
-
-    // Step 4: Find a card that meets the ratio criteria
     // Step 3: Check for strict ratio match (30%, 40%, 50%)
     const ratioChecks = [30, 40, 50]; // The strict ratios to check
 
@@ -470,12 +463,21 @@ export class TaskScheduler {
     let leastBetCard: GameKqjCards | undefined =
       filteredBets[0]?.[0] as GameKqjCards;
 
-    if (!leastBetCard) {
-      // If no least amount is found, pick a random card from specific ones
-      const specificCards = Object.keys(specificCardBets) as GameKqjCards[];
-      leastBetCard =
-        specificCards[Math.floor(Math.random() * specificCards.length)];
-    }
+      if (!leastBetCard) {
+        // If no least amount is found, pick a random card from specific ones that have a non-zero bet
+        const specificCardsWithBets = Object.entries(specificCardBets)
+          .filter(([_, amount]) => amount > 0) // Exclude zero amount cards
+          .map(([card]) => card); // Get the card names only
+        
+        if (specificCardsWithBets.length > 0) {
+          leastBetCard = specificCardsWithBets[Math.floor(Math.random() * specificCardsWithBets.length)] as GameKqjCards;
+        } else {
+          // If no specific cards have bets, fall back to a random card (still from the specific ones, even if 0 bets)
+          const allSpecificCards = Object.keys(specificCardBets); // Get all specific cards, regardless of the bet
+          leastBetCard = allSpecificCards[Math.floor(Math.random() * allSpecificCards.length)] as GameKqjCards;
+        }
+      }
+      
 
     console.log('Least bet card chosen:', leastBetCard);
     return leastBetCard;
