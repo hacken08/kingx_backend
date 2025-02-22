@@ -14,5 +14,3 @@ export class DailyGame extends BaseEntity {
   @JoinColumn({ name: 'game' })
   games: Games;
 }
-
-

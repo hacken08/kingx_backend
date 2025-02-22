@@ -23,7 +23,7 @@ export class TransactionSessionService {
     private readonly transactionSessionRepository: Repository<TransactionSession>,
     @Inject('RECORD_SESSION_KQJ_REPOSITORY')
     private readonly recordSessionRepository: Repository<RecordSessionKqj>,
-  ) { }
+  ) {}
 
   async createTransactionSession(
     dto: CreateTransactionSessionDto,
@@ -38,7 +38,10 @@ export class TransactionSessionService {
       );
     }
 
-    if (!recordSession.user) throw new BadRequestException('Associated user not found in record session.');
+    if (!recordSession.user)
+      throw new BadRequestException(
+        'Associated user not found in record session.',
+      );
     // if (dto.type === TransactionType.CREDIT) {
     //   recordSession.user.wallet += dto.token;
     // } else if (dto.type === TransactionType.DEBIT) {
@@ -97,7 +100,7 @@ export class TransactionSessionService {
   }
 
   async getTransactionsByUserId(userId: number): Promise<TransactionSession[]> {
-    const user = await this.userRepository.findOne({ where: { id: userId, } });
+    const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }

@@ -6,7 +6,9 @@ import {
 } from 'class-validator';
 
 @ValidatorConstraint({ name: 'isFullDateString', async: false })
-export class IsFullDateStringConstraint implements ValidatorConstraintInterface {
+export class IsFullDateStringConstraint
+  implements ValidatorConstraintInterface
+{
   validate(value: Date) {
     return value instanceof Date && !isNaN(value.getTime());
   }
@@ -17,7 +19,7 @@ export class IsFullDateStringConstraint implements ValidatorConstraintInterface 
 }
 
 export function IsFullDateString(validationOptions?: ValidationOptions) {
-  return function (object: Object, propertyName: string) {
+  return function (object: object, propertyName: string) {
     registerDecorator({
       name: 'isFullDateString',
       target: object.constructor,

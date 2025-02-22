@@ -92,7 +92,7 @@ export class AuthService {
       await this.userRepository.save(user);
       return user;
     } catch (error) {
-      console.error('Error creating user:', error); 
+      console.error('Error creating user:', error);
       throw new InternalServerErrorException(
         error.message || 'Error creating user',
       );

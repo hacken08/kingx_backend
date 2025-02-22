@@ -1,9 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { IsNotEmpty, IsEnum, IsNumber } from 'class-validator';
-import {
-  TokenValues,
-  GameResultStatus,
-} from 'src/common/constants';
+import { TokenValues, GameResultStatus } from 'src/common/constants';
 
 @InputType()
 export class CreateGameResultDto {

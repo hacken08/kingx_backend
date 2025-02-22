@@ -1,5 +1,11 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, Validate } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  Validate,
+} from 'class-validator';
 import { GameStatus, GameType } from 'src/common/constants';
 import {
   IsFullDateString,

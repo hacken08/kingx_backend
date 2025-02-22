@@ -9,7 +9,7 @@ import { TransactionSessionModule } from 'src/transaction_session/transaction_se
 
 @Module({
   imports: [
-    PermissionModule, 
+    PermissionModule,
     forwardRef(() => UserModule),
     forwardRef(() => TransactionSessionModule),
   ],
@@ -20,4 +20,4 @@ import { TransactionSessionModule } from 'src/transaction_session/transaction_se
   ],
   exports: [GameSessionKqjService, ...GameSessionKqjProviders],
 })
-export class GameSessionKqjModule { }
+export class GameSessionKqjModule {}

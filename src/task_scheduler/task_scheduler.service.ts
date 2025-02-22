@@ -53,7 +53,7 @@ export class TaskScheduler {
     private gamesocketGateway: GamesocketGateway,
   ) {}
 
-  @Cron('48 22 * * *', { name: 'createDailyGame' })
+  @Cron('22 13 * * *', { name: 'createDailyGame' })
   async creaeDailyGame(): Promise<void> {
     // .............testing code ...........
     // const session = await this.gameSessionKqjRepository.findOne({ where: { id: 407 } });
@@ -275,7 +275,7 @@ export class TaskScheduler {
         const resultJob: CronJob = new CronJob(
           `${toMinmiumDigit(end.getMinutes())} ${toMinmiumDigit(end.getHours())} ${toMinmiumDigit(end.getDate())} ${toMinmiumDigit(end.getMonth() + 1)} *`,
           async () => {
-            let game_result = await this.drawResult(session.id);
+            const game_result = await this.drawResult(session.id);
             console.log('game ka result -> ', {
               id: session.id,
               game_result,
@@ -313,13 +313,13 @@ export class TaskScheduler {
     }
   }
 
-  async drawResult(session_id: number): Promise<Object> {
+  async drawResult(session_id: number): Promise<object> {
     try {
       //  =========== handling result of game ====================
       const latestSessionData = await this.gameSessionKqjRepository.findOne({
         where: { id: session_id },
       });
-      let resultOfSesion: GameKqjCards = latestSessionData.game_result_card
+      const resultOfSesion: GameKqjCards = latestSessionData.game_result_card
         ? latestSessionData.game_result_card
         : await this.generateResult(session_id);
       latestSessionData.game_result_card = resultOfSesion;
@@ -332,7 +332,9 @@ export class TaskScheduler {
       });
 
       //  ============== grouping the bet which have made by same user on same card ================
-      let groupingSameBets = userBets.reduce<Record<string, RecordSessionKqj>>(
+      const groupingSameBets = userBets.reduce<
+        Record<string, RecordSessionKqj>
+      >(
         (acc, record) => {
           const uniqueKey: string = `${record.user.id}_${record.choosen_card}`;
           if (!acc[uniqueKey]) {

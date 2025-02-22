@@ -10,7 +10,6 @@ import { GameSessionRoulette } from 'src/game_session_roulette/dbrepo/game-sessi
 import { User } from 'src/user/dbrepo/user.repository';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
-
 @ObjectType('RecordSessionRoulette')
 @Entity({ name: 'record_session_roulette' })
 export class RecordSessionRoulette extends BaseEntity {

@@ -277,7 +277,7 @@ export class GameRouletteScheduler {
         const resultJob: CronJob = new CronJob(
           `${toMinmiumDigit(end.getMinutes())} ${toMinmiumDigit(end.getHours())} ${toMinmiumDigit(end.getDate())} ${toMinmiumDigit(end.getMonth() + 1)} *`,
           async () => {
-            let game_result = await this.drawResult(session.id);
+            const game_result = await this.drawResult(session.id);
             console.log('game ka result -> ', {
               id: session.id,
               game_result,
@@ -315,14 +315,14 @@ export class GameRouletteScheduler {
     }
   }
 
-  async drawResult(session_id: number): Promise<Object> {
+  async drawResult(session_id: number): Promise<object> {
     try {
       //  =========== handling result of game ====================
       const latestSessionData =
         await this.gameSessionRouletteRepository.findOne({
           where: { id: session_id },
         });
-      let resultOfSesion: GameRouletteNumbers =
+      const resultOfSesion: GameRouletteNumbers =
         latestSessionData.game_result_number
           ? latestSessionData.game_result_number
           : this.generateResult();
@@ -336,7 +336,7 @@ export class GameRouletteScheduler {
       });
 
       //  ============== grouping the bet which have made by same user on same card ================
-      let groupingSameBets = userBets.reduce<
+      const groupingSameBets = userBets.reduce<
         Record<string, RecordSessionRoulette>
       >(
         (acc, record) => {

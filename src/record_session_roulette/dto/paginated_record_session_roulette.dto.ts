@@ -1,5 +1,5 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { RecordSessionRoulette } from "../dbrepo/record-session-roulette.repository";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { RecordSessionRoulette } from '../dbrepo/record-session-roulette.repository';
 
 @ObjectType()
 export class RecordSessionRoulettePagination {

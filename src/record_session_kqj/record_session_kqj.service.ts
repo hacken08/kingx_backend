@@ -132,7 +132,7 @@ export class RecordSessionKqjService {
     offset: PaginationMetadataDto,
   ): Promise<RecordSessionKqjPagination> {
     try {
-      let whereCondition = {
+      const whereCondition = {
         game_session_id: { id: sessionId },
         deletedAt: null,
         deletedBy: null,
@@ -159,11 +159,9 @@ export class RecordSessionKqjService {
 
   async getAllRecordsBySessionId(
     sessionId: number,
-    offset?: PaginationMetadataDto,
+    // offset?: PaginationMetadataDto,
   ): Promise<RecordSessionKqjPagination> {
     try {
-      console.log(offset);
-
       const [data, totalSize] =
         await this.recordSessionKqjRepository.findAndCount({
           where: {
@@ -171,8 +169,8 @@ export class RecordSessionKqjService {
             deletedAt: null,
             deletedBy: null,
           },
-          skip: offset.skip,
-          take: offset.take,
+          // skip: offset.skip,
+          // take: offset.take,
           relations: ['user', 'game_session_id', 'transaction_session'],
         });
       return { data, totalSize };

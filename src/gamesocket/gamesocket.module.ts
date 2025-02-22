@@ -4,6 +4,6 @@ import { GamesocketGateway } from './gamesocket.gateway';
 
 @Module({
   providers: [GamesocketGateway, GamesocketService],
-  exports: [GamesocketGateway]
+  exports: [GamesocketGateway],
 })
-export class GamesocketModule { }
+export class GamesocketModule {}

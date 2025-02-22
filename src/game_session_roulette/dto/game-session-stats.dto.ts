@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType('GameSessionRouletteStats')
-export class GameSessionRouletteStats{
+export class GameSessionRouletteStats {
   @Field(() => Int)
   totalGamePlayed: number;
 

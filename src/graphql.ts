@@ -589,7 +589,7 @@ export interface IQuery {
     getAllGamesRoulette(skip: number, take: number): PaginatedGameRouletteDto | Promise<PaginatedGameRouletteDto>;
     getAllGameses(skip: number, take: number): PaginatedGamesDto | Promise<PaginatedGamesDto>;
     getAllRecordSessions(): RecordSessionKqj[] | Promise<RecordSessionKqj[]>;
-    getAllRecordsBySessionId(offset: PaginationMetadataDto, sessionId: number): RecordSessionKqjPagination | Promise<RecordSessionKqjPagination>;
+    getAllRecordsBySessionId(sessionId: number): RecordSessionKqjPagination | Promise<RecordSessionKqjPagination>;
     getAllTransactionSessions(): TransactionSession[] | Promise<TransactionSession[]>;
     getAllUsers(skip: number, take: number): PaginatedUserDto | Promise<PaginatedUserDto>;
     getCurrentRunningSessions(): GameSession[] | Promise<GameSession[]>;

@@ -114,14 +114,26 @@ export class RecordSessionKqjResolver {
   @Query(() => RecordSessionKqjPagination, { name: 'getAllRecordsBySessionId' })
   async getAllRecordsBySessionId(
     @Args('sessionId', { type: () => Int, nullable: false }) sessionId: number,
-    @Args('offset', { type: () => PaginationMetadataDto, nullable: false })
-    offset: PaginationMetadataDto,
+    // @Args('offset', { type: () => PaginationMetadataDto, nullable: true })
+    // offset?: PaginationMetadataDto,
   ) {
     return this.recordSessionKqjService.getAllRecordsBySessionId(
       sessionId,
-      offset,
+      // offset,
     );
   }
+
+  // @Query(() => RecordSessionKqjPagination, { name: 'getAllRecordsBySessionId' })
+  // async getAllRecordsBySessionId(
+  //   @Args('sessionId', { type: () => Int, nullable: false }) sessionId: number,
+  //   @Args('offset', { type: () => PaginationMetadataDto, nullable: false })
+  //   offset: PaginationMetadataDto,
+  // ) {
+  //   return this.recordSessionKqjService.getAllRecordsBySessionId(
+  //     sessionId,
+  //     offset,
+  //   );
+  // }
 
   @Query(() => [RecordSessionKqj], { name: 'getRecordsByDate' })
   async getRecordsByDate(

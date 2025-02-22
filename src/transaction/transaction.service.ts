@@ -18,25 +18,23 @@ export class TransactionService {
     private readonly userRepository: Repository<User>,
     @Inject('TRANSACTION_REPOSITORY')
     private transactionRepository: Repository<Transaction>,
-  ) { }
+  ) {}
 
   async updateWallet(userId: number, adminId: number, walletDto: WalletDto) {
-    
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) throw new NotFoundException('User not found');
-    
+
     const admin = await this.userRepository.findOne({ where: { id: adminId } });
     if (!admin) throw new NotFoundException('Admin not found');
-    
+
     if (walletDto.type === TransactionType.CREDIT) {
       user.wallet = parseInt(user.wallet.toString()) + walletDto.token;
     } else if (walletDto.type === TransactionType.DEBIT) {
       if (user.wallet < walletDto.token) {
         throw new BadRequestException('Insufficient funds');
       }
-      user.wallet =  parseInt(user.wallet.toString()) - walletDto.token
+      user.wallet = parseInt(user.wallet.toString()) - walletDto.token;
     }
-    
 
     await this.userRepository.save(user);
     const transaction = this.transactionRepository.create({
@@ -52,7 +50,9 @@ export class TransactionService {
     return transaction;
   }
 
-  async getTransactionsByDate(dateFilter: DateFilterDto): Promise<Transaction[]> {
+  async getTransactionsByDate(
+    dateFilter: DateFilterDto,
+  ): Promise<Transaction[]> {
     let start: Date;
     let end: Date;
 
@@ -61,7 +61,9 @@ export class TransactionService {
       end = new Date(dateFilter.endDate);
 
       if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        throw new BadRequestException('Invalid date format. Please provide valid ISO dates.');
+        throw new BadRequestException(
+          'Invalid date format. Please provide valid ISO dates.',
+        );
       }
     } else {
       const today = new Date();

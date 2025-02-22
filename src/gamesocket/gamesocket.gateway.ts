@@ -1,9 +1,15 @@
-import { WebSocketGateway, SubscribeMessage, MessageBody, WebSocketServer, ConnectedSocket, OnGatewayConnection } from '@nestjs/websockets';
+import {
+  WebSocketGateway,
+  SubscribeMessage,
+  MessageBody,
+  WebSocketServer,
+  ConnectedSocket,
+  OnGatewayConnection,
+} from '@nestjs/websockets';
 import { GamesocketService } from './gamesocket.service';
 import { Server, Socket } from 'socket.io';
 import { Bind, Injectable } from '@nestjs/common';
 import { GameSessionStatus } from 'src/common/constants';
-
 
 @WebSocketGateway({
   cors: {
@@ -12,12 +18,11 @@ import { GameSessionStatus } from 'src/common/constants';
 })
 @Injectable()
 export class GamesocketGateway implements OnGatewayConnection {
-  constructor(private readonly gamesocketService: GamesocketService) { }
+  constructor(private readonly gamesocketService: GamesocketService) {}
   private userSocketMap = new Map<string, Socket>();
 
   @WebSocketServer() server: Server;
-  afterInit(server: Socket) {
-  }
+  afterInit(server: Socket) {}
 
   handleConnection(socket: Socket) {
     let userId = socket.id;
@@ -50,10 +55,9 @@ export class GamesocketGateway implements OnGatewayConnection {
     @MessageBody() data: { sessionId: number },
     @ConnectedSocket() client: Socket,
   ) {
-    console.log("game is started");
+    console.log('game is started');
     this.server.emit('gameStarted', data);
   }
-
 
   @Bind(MessageBody(), ConnectedSocket())
   @SubscribeMessage('gameEnd')
@@ -61,7 +65,6 @@ export class GamesocketGateway implements OnGatewayConnection {
     @MessageBody() data: { sessionId: number },
     @ConnectedSocket() client: Socket,
   ) {
-
     // game end calculations
     // if result not exist create result
     // add data in transaction session
@@ -69,14 +72,12 @@ export class GamesocketGateway implements OnGatewayConnection {
     this.server.emit('gameEnded', data);
   }
 
-
   @Bind(MessageBody(), ConnectedSocket())
   @SubscribeMessage('gameResult')
   async handleGameResult(
     @MessageBody() data: { sessionId: number },
     @ConnectedSocket() client: Socket,
   ) {
-
     // game end calculations
     // if result not exist create result
     // add data in transaction session

@@ -451,7 +451,7 @@ type Query {
   getAllGamesRoulette(skip: Int!, take: Int!): PaginatedGameRouletteDto!
   getAllGameses(skip: Int!, take: Int!): PaginatedGamesDto!
   getAllRecordSessions: [RecordSessionKqj!]!
-  getAllRecordsBySessionId(offset: PaginationMetadataDto!, sessionId: Int!): RecordSessionKqjPagination!
+  getAllRecordsBySessionId(sessionId: Int!): RecordSessionKqjPagination!
   getAllTransactionSessions: [TransactionSession!]!
   getAllUsers(skip: Int!, take: Int!): PaginatedUserDto!
   getCurrentRunningSessions: [GameSession!]!

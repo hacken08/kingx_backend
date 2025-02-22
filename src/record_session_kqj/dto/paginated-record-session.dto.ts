@@ -1,5 +1,5 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { RecordSessionKqj } from "../dbrepo/record_session_kqj.repository";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { RecordSessionKqj } from '../dbrepo/record_session_kqj.repository';
 
 @ObjectType()
 export class RecordSessionKqjPagination {

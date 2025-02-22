@@ -8,6 +8,6 @@ import { PermissionModule } from 'src/permission/permission.module';
 @Module({
   imports: [UserModule, PermissionModule],
   providers: [TransactionResolver, TransactionService, ...TransactionProviders],
-  exports: [...TransactionProviders, TransactionService]
+  exports: [...TransactionProviders, TransactionService],
 })
 export class TransactionModule {}

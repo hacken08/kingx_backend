@@ -13,7 +13,7 @@ import {
 registerEnumType(Status, { name: 'Status' });
 registerEnumType(TransactionType, { name: 'TransactionType' });
 @ObjectType('Transaction')
-@Entity({name:"transaction"})
+@Entity({ name: 'transaction' })
 export class Transaction extends BaseEntity {
   @Field(() => Number)
   @Column({ type: 'int', default: 0 })

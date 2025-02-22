@@ -142,7 +142,7 @@ export class RecordSessionRouletteService {
     offset: PaginationMetadataDto,
   ): Promise<RecordSessionRoulettePagination> {
     try {
-      let whereCondition = {
+      const whereCondition = {
         game_session_roulette: { id: sessionId },
         deletedAt: null,
         deletedBy: null,

@@ -4,8 +4,7 @@ import { Room } from './room.repository';
 export const RecordSessionKqjProvider = [
   {
     provide: 'ROOM_REPOSITORY',
-    useFactory: (dataSource: DataSource) =>
-      dataSource.getRepository(Room),
+    useFactory: (dataSource: DataSource) => dataSource.getRepository(Room),
     inject: ['DATA_SOURCE'],
   },
 ];

@@ -1,6 +1,5 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { RecordSessionKqj } from 'src/record_session_kqj/dbrepo/record_session_kqj.repository';
 
 @InputType()
 export class PaginationMetadataDto {
@@ -13,8 +12,6 @@ export class PaginationMetadataDto {
   take: number;
 
   @Field(() => Int)
-  @IsNotEmpty() 
+  @IsNotEmpty()
   skip: number;
 }
-
-

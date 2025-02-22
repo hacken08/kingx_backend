@@ -4,7 +4,11 @@ import { DailyGameRouletteResolver } from './daily_game_roulette.resolver';
 import { DailyGameRouletteProviders } from './dbrepo/daily-game-roulette.provider';
 
 @Module({
-  providers: [DailyGameRouletteResolver, DailyGameRouletteService,...DailyGameRouletteProviders],
-  exports:[...DailyGameRouletteProviders]
+  providers: [
+    DailyGameRouletteResolver,
+    DailyGameRouletteService,
+    ...DailyGameRouletteProviders,
+  ],
+  exports: [...DailyGameRouletteProviders],
 })
 export class DailyGameRouletteModule {}

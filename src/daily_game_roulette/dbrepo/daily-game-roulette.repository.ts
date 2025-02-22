@@ -7,12 +7,14 @@ import { Entity, JoinColumn, ManyToOne } from 'typeorm';
 @Entity({ name: 'daily_game_roulette' })
 export class DailyGameRoulette extends BaseEntity {
   @Field(() => GameRoulette, { nullable: false })
-  @ManyToOne(() => GameRoulette, (gameRoulette) => gameRoulette.daily_game_roulette, {
-    nullable: false,
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(
+    () => GameRoulette,
+    (gameRoulette) => gameRoulette.daily_game_roulette,
+    {
+      nullable: false,
+      onDelete: 'CASCADE',
+    },
+  )
   @JoinColumn({ name: 'game_roulette' })
   game_roulette: GameRoulette;
 }
-
-

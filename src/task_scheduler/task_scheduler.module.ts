@@ -12,16 +12,15 @@ import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
-    GamesModule,  
-    GameSessionKqjModule, 
-    DailyGameModule, 
-    RecordSessionKqjModule, 
-    TransactionModule, 
-    TransactionSessionModule, 
+    GamesModule,
+    GameSessionKqjModule,
+    DailyGameModule,
+    RecordSessionKqjModule,
+    TransactionModule,
+    TransactionSessionModule,
     UserModule,
-    GamesocketModule
+    GamesocketModule,
   ],
   providers: [TaskScheduler],
-
 })
-export class TaskSchedulerModule { }
+export class TaskSchedulerModule {}

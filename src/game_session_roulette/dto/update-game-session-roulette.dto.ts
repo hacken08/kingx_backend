@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { IsNotEmpty } from 'class-validator';
-import {  GameRouletteNumbers } from 'src/common/constants';
+import { GameRouletteNumbers } from 'src/common/constants';
 
 @InputType()
 export class UpdateGameSessionRouletteDto {

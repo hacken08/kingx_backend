@@ -1,8 +1,4 @@
-import {
-  Field,
-  ObjectType,
-  registerEnumType,
-} from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { GameStatus, GameType } from 'src/common/constants';
 import { BaseEntity } from 'src/common/repository/base.repository';
 import { DailyGame } from 'src/daily_game/dbrepo/daily_game.repository';

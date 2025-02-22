@@ -6,13 +6,7 @@ import {
   BadRequestException,
   ConflictException,
 } from '@nestjs/common';
-import {
-  Between,
-  LessThanOrEqual,
-  MoreThan,
-  Not,
-  Repository,
-} from 'typeorm';
+import { Between, LessThanOrEqual, MoreThan, Not, Repository } from 'typeorm';
 import { User } from 'src/user/dbrepo/user.repository';
 import { Games } from './dbrepo/games.repository';
 import { CreateGamesDto } from './dto/create-game.input';

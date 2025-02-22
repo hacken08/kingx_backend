@@ -5,7 +5,7 @@ import { UserModule } from 'src/user/user.module';
 import { JWTService } from 'src/common/helper/jwt.service';
 
 @Module({
-  imports:[UserModule],
-  providers: [AuthResolver, AuthService,JWTService],
+  imports: [UserModule],
+  providers: [AuthResolver, AuthService, JWTService],
 })
 export class AuthModule {}

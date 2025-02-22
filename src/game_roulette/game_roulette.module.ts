@@ -7,7 +7,7 @@ import { AuditLogModule } from 'src/audit-log/audit-log.module';
 import { PermissionModule } from 'src/permission/permission.module';
 
 @Module({
-  imports: [UserModule, AuditLogModule,PermissionModule],
+  imports: [UserModule, AuditLogModule, PermissionModule],
   providers: [
     GameRouletteResolver,
     GameRouletteService,

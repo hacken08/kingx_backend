@@ -20,11 +20,11 @@ export class PermissionGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context).getContext();
     const user = ctx.user;
-   console.log("hbjbhjbhj")
+    console.log('hbjbhjbhj');
     if (!user) {
       throw new UnauthorizedException('User not authenticatedd');
     }
-    console.log("gfhh")
+    console.log('gfhh');
     const action = this.reflector.get<string>(
       PERMISSIONS_KEY,
       context.getHandler(),
