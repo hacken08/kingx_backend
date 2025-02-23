@@ -53,7 +53,7 @@ export class TaskScheduler {
     private gamesocketGateway: GamesocketGateway,
   ) {}
 
-  @Cron('22 13 * * *', { name: 'createDailyGame' })
+  @Cron('30 15 * * *', { name: 'createDailyGame' })
   async creaeDailyGame(): Promise<void> {
     // .............testing code ...........
     // const session = await this.gameSessionKqjRepository.findOne({ where: { id: 407 } });
@@ -463,21 +463,23 @@ export class TaskScheduler {
     let leastBetCard: GameKqjCards | undefined =
       filteredBets[0]?.[0] as GameKqjCards;
 
-      if (!leastBetCard) {
-        // If no least amount is found, pick a random card from specific ones that have a non-zero bet
-        const specificCardsWithBets = Object.entries(specificCardBets)
-          .filter(([_, amount]) => amount > 0) // Exclude zero amount cards
-          .map(([card]) => card); // Get the card names only
-        
-        if (specificCardsWithBets.length > 0) {
-          leastBetCard = specificCardsWithBets[Math.floor(Math.random() * specificCardsWithBets.length)] as GameKqjCards;
-        } else {
-          // If no specific cards have bets, fall back to a random card (still from the specific ones, even if 0 bets)
-          const allSpecificCards = Object.keys(specificCardBets); // Get all specific cards, regardless of the bet
-          leastBetCard = allSpecificCards[Math.floor(Math.random() * allSpecificCards.length)] as GameKqjCards;
-        }
+    if (!leastBetCard) {
+      // If no least amount is found, pick a random card from specific ones that have a non-zero bet
+      const specificCardsWithBets = Object.entries(specificCardBets)
+        .filter(([_, amount]) => amount > 0) // Exclude zero amount cards
+        .map(([card]) => card); // Get the card names only
+      if (specificCardsWithBets.length > 0) {
+        leastBetCard = specificCardsWithBets[
+          Math.floor(Math.random() * specificCardsWithBets.length)
+        ] as GameKqjCards;
+      } else {
+        // If no specific cards have bets, fall back to a random card (still from the specific ones, even if 0 bets)
+        const allSpecificCards = Object.keys(specificCardBets); // Get all specific cards, regardless of the bet
+        leastBetCard = allSpecificCards[
+          Math.floor(Math.random() * allSpecificCards.length)
+        ] as GameKqjCards;
       }
-      
+    }
 
     console.log('Least bet card chosen:', leastBetCard);
     return leastBetCard;

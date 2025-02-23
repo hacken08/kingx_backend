@@ -220,12 +220,6 @@ type GameSession {
   updatedBy: String!
 }
 
-type GameSessionKqjStats {
-  totalGamePlayed: Int!
-  totalLosses: Int!
-  totalWins: Int!
-}
-
 type GameSessionRoulette {
   createdAt: DateTime!
   createdBy: String!
@@ -460,17 +454,13 @@ type Query {
   getFinishedSessionsByDateOrToday(filter: DateFilterDto): Float!
   getGameResultByUserId(userId: Int!): [TransactionSession!]!
   getGameRouletteByDateOrToday(filter: DateFilterDto): [GameRoulette!]!
-  getGameSessionById(id: Int!): GameSession!
   getGameSessionRouletteById(id: Int!): GameSessionRoulette!
-  getGameSessionsByDateOrToday(filter: DateFilterDto): [GameSession!]!
   getGameSessionsRouletteByDateOrToday(filter: DateFilterDto): [GameSessionRoulette!]!
   getGamesBy(id: Int!): GameRoulette!
   getGamesByDate(filter: DateFilterDto): [Games!]!
   getGamesByDateOrToday(filter: DateFilterDto): [Games!]!
   getLiveGameSessionRoulette: GameSessionRoulette
-  getLiveGameSessions: GameSession
   getPermissions(role: Role, userId: Float): [Permission!]!
-  getPlayerStateByUserId(userId: Int!): GameSessionKqjStats!
   getProfitAndLoss(date: DateTime): ProfitAndLoss!
   getRecordSessionBy(id: Int!): RecordSessionKqj!
   getRecordsBy(UserId: Int!): [RecordSessionKqj!]!

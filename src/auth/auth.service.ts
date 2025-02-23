@@ -188,8 +188,8 @@ export class AuthService {
   }
 
   async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<string> {
-    const { id, currentPassword, newPassword, confirmPassword } =
-      resetPasswordDto;
+    const { id, currentPassword, newPassword, confirmPassword } =  resetPasswordDto;
+    console.log(resetPasswordDto);
     if (newPassword !== confirmPassword) {
       throw new BadRequestException(
         'New password and confirm password do not match',
@@ -202,6 +202,12 @@ export class AuthService {
       if (!user) {
         throw new NotFoundException(`User with id ${id} not exist`);
       }
+      console.log(
+        'current: ',
+        currentPassword,
+        'password fromdata base: ',
+        user.password,
+      );
       const isCurrentPasswordValid = PasswordHashService.verifyPassword(
         currentPassword,
         user.password,
@@ -212,10 +218,10 @@ export class AuthService {
       const hashedPassword = PasswordHashService.hashPassword(newPassword);
       user.password = hashedPassword;
       user.first_time_password_reset = true;
-
       await this.userRepository.save(user);
       return 'Password reset successful';
     } catch (error) {
+      console.error('Error resetting password:', error);
       throw new InternalServerErrorException('Failed to reset password');
     }
   }

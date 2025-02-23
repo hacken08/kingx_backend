@@ -8,7 +8,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { GameSessionKqjStats } from './dto/game_session_stats.dto';
 
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 @Resolver(() => GameSessionKqj)
 export class GameSessionKqjResolver {
   constructor(private readonly gameSessionKqjService: GameSessionKqjService) {}
@@ -24,7 +24,7 @@ export class GameSessionKqjResolver {
     );
   }
 
-  @Query(() => GameSessionKqj, { name: 'getGameSessionById' })
+  // @Query(() => GameSessionKqj, { name: 'getGameSessionById' })
   async getGameSessionById(
     @Args({ name: 'id', type: () => Int }) id: number,
   ): Promise<GameSessionKqj> {
@@ -39,12 +39,12 @@ export class GameSessionKqjResolver {
     return this.gameSessionKqjService.getAllGameSessions(skip, take);
   }
 
-  @Query(() => GameSessionKqj, { name: 'getLiveGameSessions', nullable: true })
+  // @Query(() => GameSessionKqj, { name: 'getLiveGameSessions', nullable: true })
   async getLiveGameSessions(): Promise<GameSessionKqj> {
     return await this.gameSessionKqjService.getLiveGameSessions();
   }
 
-  @Query(() => [GameSessionKqj], { name: 'getGameSessionsByDateOrToday' })
+  // @Query(() => [GameSessionKqj], { name: 'getGameSessionsByDateOrToday' })
   async getGameSessionsByDateOrToday(
     @Args('filter', { type: () => DateFilterDto, nullable: true })
     filter?: DateFilterDto,
@@ -52,7 +52,7 @@ export class GameSessionKqjResolver {
     return this.gameSessionKqjService.getGameSessionsByDateOrToday(filter);
   }
 
-  @Query(() => GameSessionKqjStats, { name: 'getPlayerStateByUserId' })
+  // @Query(() => GameSessionKqjStats, { name: 'getPlayerStateByUserId' })
   async getPlayerStateByUserId(
     @Args('userId', { type: () => Int }) userId: number,
     filter?: DateFilterDto,

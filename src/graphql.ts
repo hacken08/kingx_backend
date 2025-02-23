@@ -408,12 +408,6 @@ export interface GameSession {
     updatedBy: string;
 }
 
-export interface GameSessionKqjStats {
-    totalGamePlayed: number;
-    totalLosses: number;
-    totalWins: number;
-}
-
 export interface GameSessionRoulette {
     createdAt: DateTime;
     createdBy: string;
@@ -598,17 +592,13 @@ export interface IQuery {
     getFinishedSessionsByDateOrToday(filter?: Nullable<DateFilterDto>): number | Promise<number>;
     getGameResultByUserId(userId: number): TransactionSession[] | Promise<TransactionSession[]>;
     getGameRouletteByDateOrToday(filter?: Nullable<DateFilterDto>): GameRoulette[] | Promise<GameRoulette[]>;
-    getGameSessionById(id: number): GameSession | Promise<GameSession>;
     getGameSessionRouletteById(id: number): GameSessionRoulette | Promise<GameSessionRoulette>;
-    getGameSessionsByDateOrToday(filter?: Nullable<DateFilterDto>): GameSession[] | Promise<GameSession[]>;
     getGameSessionsRouletteByDateOrToday(filter?: Nullable<DateFilterDto>): GameSessionRoulette[] | Promise<GameSessionRoulette[]>;
     getGamesBy(id: number): GameRoulette | Promise<GameRoulette>;
     getGamesByDate(filter?: Nullable<DateFilterDto>): Games[] | Promise<Games[]>;
     getGamesByDateOrToday(filter?: Nullable<DateFilterDto>): Games[] | Promise<Games[]>;
     getLiveGameSessionRoulette(): Nullable<GameSessionRoulette> | Promise<Nullable<GameSessionRoulette>>;
-    getLiveGameSessions(): Nullable<GameSession> | Promise<Nullable<GameSession>>;
     getPermissions(role?: Nullable<Role>, userId?: Nullable<number>): Permission[] | Promise<Permission[]>;
-    getPlayerStateByUserId(userId: number): GameSessionKqjStats | Promise<GameSessionKqjStats>;
     getProfitAndLoss(date?: Nullable<DateTime>): ProfitAndLoss | Promise<ProfitAndLoss>;
     getRecordSessionBy(id: number): RecordSessionKqj | Promise<RecordSessionKqj>;
     getRecordsBy(UserId: number): RecordSessionKqj[] | Promise<RecordSessionKqj[]>;
