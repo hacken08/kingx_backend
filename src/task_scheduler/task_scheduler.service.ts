@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   ConflictException,
   Inject,
@@ -9,7 +11,6 @@ import { Games } from 'src/games/dbrepo/games.repository';
 import {
   Between,
   LessThanOrEqual,
-  MoreThan,
   MoreThanOrEqual,
   Repository,
   Transaction,
@@ -115,6 +116,7 @@ export class TaskScheduler {
     }
 
     const { games } = dailyGame;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { start_time, game_duration, game_in_day, start_date, end_date, id } =
       games;
 
@@ -439,7 +441,6 @@ export class TaskScheduler {
     console.log('specificCardBets ->', specificCardBets);
     console.log('totalBetAmount ->', totalBetAmount);
 
-
     // Step 3: Check for strict ratio match (30%, 40%, 50%)
     const ratioChecks = [30, 40, 50]; // The strict ratios to check
 
@@ -463,37 +464,35 @@ export class TaskScheduler {
     let leastBetCard: GameKqjCards | undefined =
       filteredBets[0]?.[0] as GameKqjCards;
 
-      if (!leastBetCard) {
-        // If no least amount is found in specific cards with bets, pick a random card from specific ones
-        // Get all specific cards from the GameKqjCards enum that are not general categories
-        const allSpecificCards: GameKqjCards[] = [
-          GameKqjCards.JACK_OF_SPADES,
-          GameKqjCards.QUEEN_OF_SPADES,
-          GameKqjCards.KING_OF_SPADES,
-          GameKqjCards.JACK_OF_HEARTS,
-          GameKqjCards.QUEEN_OF_HEARTS,
-          GameKqjCards.KING_OF_HEARTS,
-          GameKqjCards.JACK_OF_DIAMONDS,
-          GameKqjCards.QUEEN_OF_DIAMONDS,
-          GameKqjCards.KING_OF_DIAMONDS,
-          GameKqjCards.JACK_OF_CLUBS,
-          GameKqjCards.QUEEN_OF_CLUBS,
-          GameKqjCards.KING_OF_CLUBS
-        ];
-        
-        if (allSpecificCards.length > 0) {
-          // Pick a random card from all specific cards (even those with 0 bets)
-          leastBetCard = allSpecificCards[Math.floor(Math.random() * allSpecificCards.length)];
-        }
+    if (!leastBetCard) {
+      // If no least amount is found in specific cards with bets, pick a random card from specific ones
+      // Get all specific cards from the GameKqjCards enum that are not general categories
+      const allSpecificCards: GameKqjCards[] = [
+        GameKqjCards.JACK_OF_SPADES,
+        GameKqjCards.QUEEN_OF_SPADES,
+        GameKqjCards.KING_OF_SPADES,
+        GameKqjCards.JACK_OF_HEARTS,
+        GameKqjCards.QUEEN_OF_HEARTS,
+        GameKqjCards.KING_OF_HEARTS,
+        GameKqjCards.JACK_OF_DIAMONDS,
+        GameKqjCards.QUEEN_OF_DIAMONDS,
+        GameKqjCards.KING_OF_DIAMONDS,
+        GameKqjCards.JACK_OF_CLUBS,
+        GameKqjCards.QUEEN_OF_CLUBS,
+        GameKqjCards.KING_OF_CLUBS,
+      ];
+
+      if (allSpecificCards.length > 0) {
+        // Pick a random card from all specific cards (even those with 0 bets)
+        leastBetCard =
+          allSpecificCards[Math.floor(Math.random() * allSpecificCards.length)];
       }
     }
-
-    console.log('Least bet card chosen:', leastBetCard);
     return leastBetCard;
   }
 
   // Helper function: Convert TokenValues to actual numeric bet amount
-  private getTokenValue(token: TokenValues): number {
+  getTokenValue(token: TokenValues): number {
     // Define token-to-amount mapping based on your system
     const tokenMap: Record<TokenValues, number> = {
       [TokenValues.TOKEN_11]: 11,
@@ -508,7 +507,7 @@ export class TaskScheduler {
   }
 
   // Helper function: Check if a card is a "specific card"
-  private isSpecificCard(card: GameKqjCards): boolean {
+  isSpecificCard(card: GameKqjCards): boolean {
     return ![
       'JACK',
       'QUEEN',
