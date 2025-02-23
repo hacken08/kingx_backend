@@ -463,21 +463,28 @@ export class TaskScheduler {
     let leastBetCard: GameKqjCards | undefined =
       filteredBets[0]?.[0] as GameKqjCards;
 
-    if (!leastBetCard) {
-      // If no least amount is found, pick a random card from specific ones that have a non-zero bet
-      const specificCardsWithBets = Object.entries(specificCardBets)
-        .filter(([_, amount]) => amount > 0) // Exclude zero amount cards
-        .map(([card]) => card); // Get the card names only
-      if (specificCardsWithBets.length > 0) {
-        leastBetCard = specificCardsWithBets[
-          Math.floor(Math.random() * specificCardsWithBets.length)
-        ] as GameKqjCards;
-      } else {
-        // If no specific cards have bets, fall back to a random card (still from the specific ones, even if 0 bets)
-        const allSpecificCards = Object.keys(specificCardBets); // Get all specific cards, regardless of the bet
-        leastBetCard = allSpecificCards[
-          Math.floor(Math.random() * allSpecificCards.length)
-        ] as GameKqjCards;
+      if (!leastBetCard) {
+        // If no least amount is found in specific cards with bets, pick a random card from specific ones
+        // Get all specific cards from the GameKqjCards enum that are not general categories
+        const allSpecificCards: GameKqjCards[] = [
+          GameKqjCards.JACK_OF_SPADES,
+          GameKqjCards.QUEEN_OF_SPADES,
+          GameKqjCards.KING_OF_SPADES,
+          GameKqjCards.JACK_OF_HEARTS,
+          GameKqjCards.QUEEN_OF_HEARTS,
+          GameKqjCards.KING_OF_HEARTS,
+          GameKqjCards.JACK_OF_DIAMONDS,
+          GameKqjCards.QUEEN_OF_DIAMONDS,
+          GameKqjCards.KING_OF_DIAMONDS,
+          GameKqjCards.JACK_OF_CLUBS,
+          GameKqjCards.QUEEN_OF_CLUBS,
+          GameKqjCards.KING_OF_CLUBS
+        ];
+        
+        if (allSpecificCards.length > 0) {
+          // Pick a random card from all specific cards (even those with 0 bets)
+          leastBetCard = allSpecificCards[Math.floor(Math.random() * allSpecificCards.length)];
+        }
       }
     }
 
