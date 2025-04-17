@@ -19,6 +19,7 @@ import { ResetPasswordDto } from './dto/reset_password.dto';
 import { Role, UserStatus } from 'src/common/constants';
 import axios from 'axios';
 import { GuestTokenType } from './entities/guest.entity';
+import { ChangePasswordDto } from './dto/change_password.dto';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +27,7 @@ export class AuthService {
     @Inject('USER_REPOSITORY')
     private readonly userRepository: Repository<User>,
     private jwtService: JWTService,
-  ) { }
+  ) {}
   async AdminSignUp(signUpCredential: SignUpCredential) {
     const { username, email, password, role, city, phone_number } =
       signUpCredential;
@@ -264,6 +265,31 @@ export class AuthService {
       return 'Password reset successful';
     } catch (error) {
       console.error('Error resetting password:', error);
+      throw new InternalServerErrorException('Failed to reset password');
+    }
+  }
+  async changePassword(changePasswordDto: ChangePasswordDto): Promise<string> {
+    const { id, newPassword, confirmPassword } = changePasswordDto;
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestException(
+        'New password and confirm password do not match',
+      );
+    }
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id, deletedAt: null, deletedBy: null },
+      });
+      if (!user) {
+        throw new NotFoundException(`User with id ${id} not exist`);
+      }
+
+      const hashedPassword = PasswordHashService.hashPassword(newPassword);
+      user.password = hashedPassword;
+      user.first_time_password_reset = true;
+
+      await this.userRepository.save(user);
+      return 'Password reset successful';
+    } catch (error) {
       throw new InternalServerErrorException('Failed to reset password');
     }
   }

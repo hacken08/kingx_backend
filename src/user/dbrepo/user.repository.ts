@@ -89,6 +89,10 @@ export class User extends BaseEntity {
 
   @Field(() => Number)
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  credit: number;
+
+  @Field(() => Number)
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   wallet_limit: number;
 
   @Field(() => UserStatus)

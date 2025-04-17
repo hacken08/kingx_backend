@@ -46,6 +46,12 @@ input AuditLogFiltersInput {
   take: Int!
 }
 
+input ChangePasswordDto {
+  confirmPassword: String!
+  id: Int!
+  newPassword: String!
+}
+
 input CreateGameRouletteDto {
   admin_id: Int!
   end_date: DateTime!
@@ -317,6 +323,7 @@ type Mutation {
   DeleteGames(id: Int!): Boolean!
   addUser(addUserDto: AddUserDto!): User!
   adminSignUp(signUpCredential: SignUpCredential!): User!
+  changePassword(changePassword: ChangePasswordDto!): String!
   createGameRoulette(createGameRouletteDto: CreateGameRouletteDto!): GameRoulette!
   createGames(createGamesDto: CreateGamesDto!): Games!
   createNotification(createNotificationInput: CreateNotificationInput!): Notification!
@@ -695,6 +702,7 @@ input UpdateNotificationInput {
 input UpdateUserDto {
   address: String
   city: String
+  credit: Float
   email: String
   first_time_password_reset: Boolean
   name: String
@@ -714,7 +722,11 @@ type User {
   createdAt: DateTime!
   createdBy: String!
   createdGames: Games!
+<<<<<<< HEAD
   credit_referance: Int!
+=======
+  credit: Float!
+>>>>>>> b94b14b0fedd970d569ce41bc94699ed7f6669e0
   deletedAt: DateTime!
   deletedBy: String!
   email: String!

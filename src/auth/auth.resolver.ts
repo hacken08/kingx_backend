@@ -9,7 +9,7 @@ import { SignInCredential } from './dto/signin.input';
 import { TokenType } from './entities/token.entity';
 import { ResetPasswordDto } from './dto/reset_password.dto';
 import { GuestTokenType } from './entities/guest.entity';
-import { JWTService } from 'src/common/helper';
+import { ChangePasswordDto } from './dto/change_password.dto';
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -66,6 +66,13 @@ export class AuthResolver {
     @Args('resetPasswordDto') resetPasswordDto: ResetPasswordDto,
   ): Promise<string> {
     return await this.authService.resetPassword(resetPasswordDto);
+  }
+
+  @Mutation(() => String)
+  async changePassword(
+    @Args('changePassword') changePasswordDto: ChangePasswordDto,
+  ): Promise<string> {
+    return await this.authService.changePassword(changePasswordDto);
   }
 
   @Mutation(() => String)
